@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: shortlinks
+      POSTGRES_PASSWORD: shortlinks
+      POSTGRES_DB: shortlinks
+    ports:
+      - "5433:5432"
+    volumes:
+      - shortlinks_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shortlinks -d shortlinks"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  short-links:
+    build: .
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://shortlinks:shortlinks@postgres:5432/shortlinks
+      NODE_ENV: development
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  shortlinks_pg_data:

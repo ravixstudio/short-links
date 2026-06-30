@@ -1,0 +1,31 @@
+{
+  "name": "@ravixstudio/short-links",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "test": "node --import tsx --test src/**/*.test.ts",
+    "test:integration": "bash scripts/integration-test.sh",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "dotenv": "^16.6.1",
+    "drizzle-orm": "^0.45.2",
+    "hono": "^4.10.6",
+    "pg": "^8.15.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/pg": "^8.11.13",
+    "drizzle-kit": "^0.31.4",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}
