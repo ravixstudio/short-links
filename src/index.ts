@@ -5,7 +5,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 
 import { env } from "./config/env.js";
-import { connectDB } from "./db/connection.js";
+import { connectDB, runMigrations } from "./db/connection.js";
 import { redirectRoutes } from "./routes/redirect.js";
 import { linksRoutes } from "./routes/v1/links.js";
 
@@ -23,6 +23,7 @@ app.route("/v1/links", linksRoutes);
 app.route("/", redirectRoutes);
 
 async function start(): Promise<void> {
+  await runMigrations();
   await connectDB();
 
   serve({
