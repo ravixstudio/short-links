@@ -29,6 +29,12 @@ curl -I http://localhost:8002/{slug}
 
 ## Production deploy
 
+### Railway (recommended)
+
+See [deploy/RAILWAY.md](./deploy/RAILWAY.md) for step-by-step setup (Postgres, env vars, custom domain `go.innoventry.in`).
+
+### Self-hosted / Docker
+
 1. Set env vars from `.env.example` (strong `API_KEY` and `IP_HASH_SALT`).
 2. `docker compose up -d` or deploy the Docker image to ECS/VM.
 3. Configure DNS: `go.innoventry.in` -> load balancer/server.
